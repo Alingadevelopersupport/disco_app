@@ -57,7 +57,7 @@ Upgrade to Ruby 2.6.5.
 Upgrade the following gems:
 ```
 gem 'shopify_api', '~> 9.0'
-gem 'shopify_app', '~> 12.0.7'
+gem 'shopify_app', '>= 12.0.7'
 gem 'sidekiq', '~> 6.0'
 ```
 
