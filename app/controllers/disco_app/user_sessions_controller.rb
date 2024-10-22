@@ -3,6 +3,7 @@ class DiscoApp::UserSessionsController < ApplicationController
   include DiscoApp::Concerns::AuthenticatedController
 
   def new
+    Rails.logger.info "sanitized_shop_name ::::::: #{sanitized_shop_name.present?}"
     authenticate if sanitized_shop_name.present?
   end
 
@@ -36,8 +37,10 @@ class DiscoApp::UserSessionsController < ApplicationController
 
     def authenticate
       if sanitized_shop_name.present?
+        Rails.logger.info "call auth shopify user ::::::: #{sanitized_shop_name}"
         fullpage_redirect_to "#{main_app.root_path}auth/shopify_user?shop=#{sanitized_shop_name}"
       else
+        Rails.logger.info "::::::: call return address :::::::"
         redirect_to return_address
       end
     end
@@ -48,10 +51,13 @@ class DiscoApp::UserSessionsController < ApplicationController
     end
 
     def return_address
+      Rails.logger.info "session ::::::: #{session}"
+      Rails.logger.info "main_app root_url ::::::: #{main_app&.root_url}"
       session.delete(:return_to) || main_app.root_url
     end
 
     def sanitized_shop_name
+      Rails.logger.info "shop ::::::: #{@shop.inspect}"
       @shop.present? ? @shop.shopify_domain : super
     end
 
