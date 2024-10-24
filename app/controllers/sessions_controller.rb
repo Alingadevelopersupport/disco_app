@@ -21,7 +21,7 @@ class SessionsController < ShopifyApp::SessionsController
         shop = DiscoApp::Shop.find_by!(shopify_domain: sanitized_shop_name)
 
         sess = ShopifyAPI::Session.new(domain: shop.shopify_domain, token: shop.shopify_token, api_version: shop.api_version)
-        session[:shopify] = ShopifyApp::SessionRepository.store(sess)
+        session[:shop_id] = ShopifyApp::SessionRepository.store(sess)
         session[:shopify_domain] = sanitized_shop_name
 
         redirect_to(disco_app.frame_path) && return

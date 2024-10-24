@@ -20,6 +20,8 @@ const ErrorBoundary = bugsnagClient.use(createPlugin(React));
 
 const AppWithApi = withApi(App);
 
+console.log("call disco app index js")
+
 ReactDOM.render(
   <ErrorBoundary>
     <Router>
