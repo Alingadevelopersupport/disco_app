@@ -18,6 +18,8 @@ module DiscoApp::Concerns::AuthenticatedController
   private
 
     def auto_login
+      p "----------- shop_session -------- #{shop_session.inspect} -----"
+      Rails.logger.info "::::::: call shop_session ::::::: #{shop_session.inspect} :::::::"
       return unless shop_session.nil? && request_hmac_valid?
 
       shop = DiscoApp::Shop.find_by(shopify_domain: sanitized_shop_name)
