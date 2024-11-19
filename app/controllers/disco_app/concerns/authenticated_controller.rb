@@ -4,6 +4,7 @@ module DiscoApp::Concerns::AuthenticatedController
   include ShopifyApp::LoginProtection
 
   included do
+    byebug
     before_action :auto_login
     before_action :check_shop_whitelist
     before_action :login_again_if_different_user_or_shop
