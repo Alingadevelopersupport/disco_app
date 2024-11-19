@@ -60,7 +60,7 @@ class DiscoApp::UserSessionsController < ApplicationController
     end
 
     def sanitized_shop_name
-      Rails.logger.info "shop ::::::: #{@shop.inspect}"
+      # Rails.logger.info "shop ::::::: #{@shop.inspect}"
       @shop.present? ? @shop.shopify_domain : super
     end
 
