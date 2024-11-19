@@ -12,10 +12,13 @@ class DiscoApp::UserSessionsController < ApplicationController
   end
 
   def callback
+    Rails.logger.info "::::::: call callback :::::::"
     if auth_hash
+      Rails.logger.info "::::::: call if of callback :::::::"
       login_user
       redirect_to return_address
     else
+      Rails.logger.info "::::::: call else of callback :::::::"
       redirect_to root_path
     end
   end
