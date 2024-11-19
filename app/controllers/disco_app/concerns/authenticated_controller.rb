@@ -4,7 +4,6 @@ module DiscoApp::Concerns::AuthenticatedController
   include ShopifyApp::LoginProtection
 
   included do
-    byebug
     before_action :auto_login
     before_action :check_shop_whitelist
     before_action :login_again_if_different_user_or_shop
@@ -19,6 +18,7 @@ module DiscoApp::Concerns::AuthenticatedController
   private
 
     def auto_login
+      byebug
       Rails.logger.info "::::::: auto_login ::::::: #{shop_session.inspect} ::::::: request_hmac_valid ::::::: #{request_hmac_valid?} ::::::: #{shop_session.nil? && request_hmac_valid?} :::::::"
       return unless shop_session.nil? && request_hmac_valid?
 
@@ -73,6 +73,7 @@ module DiscoApp::Concerns::AuthenticatedController
     end
 
     def check_shop_whitelist
+      byebug
       return unless shop_session
       return if ENV['WHITELISTED_DOMAINS'].blank?
       return if ENV['WHITELISTED_DOMAINS'].include?(shop_session.url)
