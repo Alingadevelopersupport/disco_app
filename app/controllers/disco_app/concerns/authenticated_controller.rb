@@ -18,6 +18,7 @@ module DiscoApp::Concerns::AuthenticatedController
   private
 
     def auto_login
+      Rails.logger.info "::::::: RAILS_ENV ::::::: #{ENV['RAILS_ENV']} :::::::"
       byebug
       Rails.logger.info "::::::: auto_login ::::::: #{shop_session.inspect} ::::::: request_hmac_valid ::::::: #{request_hmac_valid?} ::::::: #{shop_session.nil? && request_hmac_valid?} :::::::"
       return unless shop_session.nil? && request_hmac_valid?
