@@ -19,9 +19,8 @@ module DiscoApp::Concerns::AuthenticatedController
 
     def auto_login
       Rails.logger.info "::::::: RAILS_ENV ::::::: #{ENV['RAILS_ENV']} :::::::"
-      byebug
       Rails.logger.info "::::::: auto_login ::::::: #{shop_session.inspect} ::::::: request_hmac_valid ::::::: #{request_hmac_valid?} ::::::: #{shop_session.nil? && request_hmac_valid?} :::::::"
-      return unless shop_session.nil? && request_hmac_valid?
+      return unless shop_session.nil?
 
       shop = DiscoApp::Shop.find_by(shopify_domain: sanitized_shop_name)
       Rails.logger.info "::::::: auto_login shop::::::: #{shop.inspect} :::::::"
@@ -74,7 +73,6 @@ module DiscoApp::Concerns::AuthenticatedController
     end
 
     def check_shop_whitelist
-      byebug
       return unless shop_session
       return if ENV['WHITELISTED_DOMAINS'].blank?
       return if ENV['WHITELISTED_DOMAINS'].include?(shop_session.url)
