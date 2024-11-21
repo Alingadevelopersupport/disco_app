@@ -55,15 +55,20 @@ module DiscoApp::Concerns::AuthenticatedController
     end
 
     def check_active_charge
+      Rails.logger.info "::::::: 1 :::::::"
       return unless @shop.current_subscription?
+      Rails.logger.info "::::::: 2 :::::::"
       return unless @shop.current_subscription.requires_active_charge?
+      Rails.logger.info "::::::: 3 :::::::"
       return if @shop.development?
+      Rails.logger.info "::::::: 4 :::::::"
       return if @shop.current_subscription.active_charge?
-
+      Rails.logger.info "::::::: 5 :::::::"
       redirect_if_not_current_path disco_app.new_subscription_charge_path(@shop.current_subscription)
     end
 
     def redirect_if_not_current_path(target)
+      Rails.logger.info "::::::: target ::::::: #{target} ::::::: request.path ::::::: #{request.path} :::::::"
       redirect_to target if request.path != target
     end
 
