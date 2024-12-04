@@ -99,7 +99,9 @@ module DiscoApp::Concerns::AuthenticatedController
 
     def request_hmac_valid?
       Rails.logger.info "::::::: request::::::: #{request.query_string} :::::::"
-      DiscoApp::RequestValidationService.hmac_valid?(request.query_string, ShopifyApp.configuration.secret)
+      validate_hmac = DiscoApp::RequestValidationService.hmac_valid?(request.query_string, ShopifyApp.configuration.secret)
+      Rails.logger.info "::::::: validate_hmac ::::::: #{validate_hmac} :::::::"
+      validate_hmac
     end
 
     def check_shop_whitelist
