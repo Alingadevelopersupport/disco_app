@@ -41,8 +41,8 @@ class DiscoApp::UserSessionsController < ApplicationController
     def authenticate
       if sanitized_shop_name.present?
         url = "#{main_app.root_path}auth/shopify_user?shop=#{sanitized_shop_name}"
-        Rails.logger.info "call auth shopify user ::::::: #{sanitized_shop_name} ::::::: #{url} :::::::"
-        fullpage_redirect_to "#{main_app.root_path}auth/callback?shop=#{sanitized_shop_name}"
+        Rails.logger.info "call auth shopify user ::::::: #{sanitized_shop_name} ::::::: #{url} ::::::: #{main_app.root_path} ::::::: #{main_app.root_url} :::::::"
+        fullpage_redirect_to url
       else
         Rails.logger.info "::::::: call return address :::::::"
         redirect_to return_address
