@@ -1,7 +1,7 @@
 if Rails.configuration.cache_classes
-  ShopifyApp::SessionRepository.storage = DiscoApp::SessionStorage
+  ShopifyApp::SessionRepository.shop_storage = DiscoApp::SessionStorage
 else
   ActiveSupport::Reloader.to_prepare do
-    ShopifyApp::SessionRepository.storage = DiscoApp::SessionStorage
+    ShopifyApp::SessionRepository.shop_storage = DiscoApp::SessionStorage
   end
 end
