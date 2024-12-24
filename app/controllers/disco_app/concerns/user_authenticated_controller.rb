@@ -13,7 +13,7 @@ module DiscoApp::Concerns::UserAuthenticatedController
        Rails.logger.info "::::::: UserAuthenticatedController shopify_user ::::::: #{session[:shopify_user]&.inspect} :::::::"
       @user = DiscoApp::User.find(session[:shopify_user])
     rescue ActiveRecord::RecordNotFound
-      redirect_to disco_app.new_user_session_path
+      redirect_to shopify_user_login_url(shop: sanitized_shop_name)
     end
 
 end
