@@ -36,7 +36,7 @@ class DiscoApp::UserSessionsController < ApplicationController
 
     def authenticate
       if sanitized_shop_name.present?
-        fullpage_redirect_to "#{main_app.root_path}auth/shopify_user?shop=#{sanitized_shop_name}"
+        fullpage_redirect_to "#{main_app.root_path}auth/shopify_user?shop=#{sanitized_shop_name}&host=#{params[:host]}"
       else
         redirect_to return_address
       end
