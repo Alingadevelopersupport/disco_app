@@ -3,6 +3,7 @@ class DiscoApp::UserSessionsController < ApplicationController
   include DiscoApp::Concerns::AuthenticatedController
 
   def new
+    Rails.logger.info "====================== host :::::: #{params[:host]} ====================="
     authenticate if sanitized_shop_name.present?
   end
 
@@ -36,7 +37,8 @@ class DiscoApp::UserSessionsController < ApplicationController
 
     def authenticate
       if sanitized_shop_name.present?
-        fullpage_redirect_to "#{main_app.root_path}auth/shopify_user?shop=#{sanitized_shop_name}&host=#{params[:host]}"
+        host = params[:host].present? ? params[:host] : 'YWRtaW4uc2hvcGlmeS5jb20vc3RvcmUvdmVuZXRhLWJsaW5kcy1kZXY'
+        fullpage_redirect_to "#{main_app.root_path}auth/shopify_user?shop=#{sanitized_shop_name}&host=#{host}"
       else
         redirect_to return_address
       end
