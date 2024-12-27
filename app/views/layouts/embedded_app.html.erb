@@ -6,10 +6,15 @@
   <script src="//cdn.shopify.com/s/assets/external/app.js?<%= Time.now.strftime('%Y%m%d%H') %>"></script>
   <script type="text/javascript">
     // Initialise the Shopify App.
+    console.log("Disco app embedded app");
+    const host = new URLSearchParams(window.location.search).get('host');
+    console.log("host", host);
+
     ShopifyApp.init({
       "apiKey": "<%= ShopifyApp.configuration.api_key %>",
       "shopOrigin": "<%= "https://#{ @current_shopify_session.domain }" if @current_shopify_session %>",
-      "debug": <%= Rails.env.development? ? 'true' : 'false' %>
+      "debug": <%= Rails.env.development? ? 'true' : 'false' %>,
+      "host": host,
     });
   </script>
 
